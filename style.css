@@ -385,13 +385,11 @@ html[data-theme="light"] .mode-btn.active {
   color: var(--fg);
 }
 
-.kb-key.bump::after {
-  content: "";
+.kb-key .dot {
   display: block;
-  width: 4px;
-  height: 4px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background: var(--accent);
   margin: 2px auto 0;
 }
 

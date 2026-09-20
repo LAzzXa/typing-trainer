@@ -103,3 +103,140 @@ const FINGERS = {
   "z": "left 4", "x": "left 3", "c": "left 2", "v": "left 1", "b": "left 1",
   "n": "right 1", "m": "right 1"
 };
+
+const FINGER_KEY = {
+  q: "l4", a: "l4", z: "l4", "1": "l4",
+  w: "l3", s: "l3", x: "l3", "2": "l3",
+  e: "l2", d: "l2", c: "l2", "3": "l2",
+  r: "l1", f: "l1", v: "l1", t: "l1", g: "l1", b: "l1", "4": "l1", "5": "l1",
+  y: "r1", h: "r1", n: "r1", u: "r1", j: "r1", m: "r1", "6": "r1", "7": "r1",
+  i: "r2", k: "r2", "8": "r2", ",": "r2",
+  o: "r3", l: "r3", "9": "r3", ".": "r3",
+  p: "r4", ";": "r4", "0": "r4", "/": "r4", "-": "r4", "=": "r4", "[": "r4", "]": "r4", "'": "r4"
+};
+
+const FINGER_COLOR = {
+  l1: "#f87171", l2: "#fbbf24", l3: "#f472b6", l4: "#38bdf8",
+  r1: "#34d399", r2: "#a78bfa", r3: "#fb923c", r4: "#f43f5e"
+};
+
+const QUOTES = [
+  "The quick brown fox jumps over the lazy dog.",
+  "To be or not to be, that is the question.",
+  "All that glitters is not gold.",
+  "A journey of a thousand miles begins with a single step.",
+  "The only way to do great work is to love what you do.",
+  "I think, therefore I am.",
+  "Simplicity is the ultimate sophistication.",
+  "Two roads diverged in a wood, and I took the one less traveled.",
+  "It does not matter how slowly you go as long as you do not stop.",
+  "Whether you think you can or you think you can't, you're right.",
+  "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+  "The best way to predict the future is to invent it.",
+  "Do or do not. There is no try.",
+  "Stay hungry, stay foolish.",
+  "Imagination is more important than knowledge.",
+  "Happiness depends upon ourselves.",
+  "Believe you can and you're halfway there.",
+  "The future belongs to those who believe in the beauty of their dreams.",
+  "What we think, we become.",
+  "It always seems impossible until it is done.",
+  "Little by little, one travels far.",
+  "A goal without a plan is just a wish.",
+  "The secret of getting ahead is getting started.",
+  "Well done is better than well said.",
+  "The only impossible journey is the one you never begin.",
+  "Good things come to those who wait.",
+  "Practice makes perfect.",
+  "Actions speak louder than words.",
+  "Knowledge is power.",
+  "Time waits for no one."
+];
+
+const FINGER_LESSONS = [
+  {
+    id: "finger-l1",
+    title: "Left index finger — r t f g v b",
+    hint: "Reach up and down from f with your LEFT index finger.",
+    texts: [
+      "star tab bag art tar far",
+      "fat sat rad grab vast drag",
+      "stab raft tag dad add sag",
+      "art star tab grab far vast"
+    ]
+  },
+  {
+    id: "finger-l2",
+    title: "Left middle finger — e d c",
+    hint: "Reach from d with your LEFT middle finger.",
+    texts: [
+      "face case fade safe deaf",
+      "aced deaf fade case sad add",
+      "dad add sad decaf face fade",
+      "case fade aced safe deaf dad"
+    ]
+  },
+  {
+    id: "finger-l3",
+    title: "Left ring finger — w s x",
+    hint: "Reach from s with your LEFT ring finger.",
+    texts: [
+      "was saw wax sax ads as",
+      "saw was wax ads sax was",
+      "wax sax was saw ads sax"
+    ]
+  },
+  {
+    id: "finger-l4",
+    title: "Left pinky — q a z",
+    hint: "Reach from a with your LEFT pinky finger.",
+    texts: [
+      "sad fad ads add as ads",
+      "dads sad fad add ads sad",
+      "fad ads add sad dads sad"
+    ]
+  },
+  {
+    id: "finger-r1",
+    title: "Right index finger — y u h j n m",
+    hint: "Reach up, down and sideways from j with your RIGHT index finger.",
+    texts: [
+      "hull null lull july my hymn",
+      "mum nun hull lull july null",
+      "lull july null hull my mum",
+      "hymn lull july mum hull null"
+    ]
+  },
+  {
+    id: "finger-r2",
+    title: "Right middle finger — i k",
+    hint: "Reach from k with your RIGHT middle finger.",
+    texts: [
+      "ilk kill ill ilk kill ill",
+      "ill ik kill ilk kill ill",
+      "kill ilk ill kill ik kill"
+    ]
+  },
+  {
+    id: "finger-r3",
+    title: "Right ring finger — o l",
+    hint: "Reach from l with your RIGHT ring finger.",
+    texts: [
+      "look loll kook look kool loll",
+      "kool loll look kook look loll",
+      "loll kook look kool loll look"
+    ]
+  },
+  {
+    id: "finger-r4",
+    title: "Right pinky — p ; / .",
+    hint: "Reach from ; with your RIGHT pinky finger.",
+    texts: [
+      "pop lop plop pop polo lop",
+      "polo plop pop lop poll plop",
+      "lop polo plop poll pop lop"
+    ]
+  }
+];
+
+const ALL_LESSONS = LESSONS.concat(FINGER_LESSONS);

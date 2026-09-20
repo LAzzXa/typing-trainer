@@ -34,7 +34,7 @@
     document.querySelectorAll(".mode-btn").forEach((b) => {
       b.classList.toggle("active", b.dataset.mode === m);
     });
-    difficultySel.hidden = m === "lessons" || m === "online";
+    difficultySel.hidden = m === "lessons" || m === "online" || m === "quotes";
     lessonPanel.hidden = m !== "lessons";
     multiPanel.hidden = m !== "online";
     if (m === "online") {
@@ -53,7 +53,13 @@
     Engine.settings.difficulty = difficultySel.value || "medium";
     Engine.onFinish = (result) => showResult(result, true);
     Engine.startAt = null;
-    Engine.reset();
+    let text;
+    if (mode === "quotes") {
+      text = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+      Engine.reset(text);
+    } else {
+      Engine.reset();
+    }
     timerLive.textContent = mode === "time" ? Engine.settings.timeLimit : "--";
     wpmLive.textContent = "0";
     accLive.textContent = "100";
@@ -65,7 +71,7 @@
   }
 
   function startLesson() {
-    const lesson = LESSONS[currentLessonIdx];
+    const lesson = ALL_LESSONS[currentLessonIdx];
     const texts = lesson.texts;
     currentLessonOffset = (currentLessonOffset + 1) % texts.length;
     Engine.settings.mode = "words";
@@ -85,7 +91,7 @@
   function renderLessonList() {
     const marks = JSON.parse(localStorage.getItem("st-lessons") || "{}");
     lessonList.innerHTML = "";
-    LESSONS.forEach((lesson, i) => {
+    ALL_LESSONS.forEach((lesson, i) => {
       const btn = document.createElement("button");
       btn.className = "lesson-btn" + (i === currentLessonIdx ? " active" : "");
       btn.innerHTML =
@@ -203,14 +209,16 @@
     bestEl.textContent = best ? `Best WPM: ${best}` : "";
   }
 
-  function buildKeyboard() {
+function buildKeyboard() {
     const kb = document.getElementById("keyboard");
     let html = "";
     KEYBOARD_LAYOUT.forEach((row, ri) => {
       html += `<div class="kb-row">`;
       if (ri === 0) html += `<span class="kb-gap"></span>`;
       row.forEach((k) => {
-        html += `<button type="button" class="kb-key${HOME_ROW.includes(k) ? " home" : ""}${k === "j" || k === "f" ? " bump" : ""}" data-key="${k}">${k.toUpperCase()}</button>`;
+        const finger = FINGER_KEY[k];
+        const color = FINGER_COLOR[finger];
+        html += `<button type="button" class="kb-key${HOME_ROW.includes(k) ? " home" : ""} finger-${finger}" data-key="${k}" title="${finger ? finger.toUpperCase() : ""}">${k.toUpperCase()}<span class="dot"${color ? ` style="background:${color}"` : ""}></span></button>`;
       });
       if (ri === KEYBOARD_LAYOUT.length - 1) html += `<span class="kb-gap"></span>`;
       html += `</div>`;
@@ -259,7 +267,7 @@
   });
 
   document.getElementById("next-lesson").addEventListener("click", () => {
-    currentLessonIdx = (currentLessonIdx + 1) % LESSONS.length;
+    currentLessonIdx = (currentLessonIdx + 1) % ALL_LESSONS.length;
     currentLessonOffset = 0;
     renderLessonList();
     startLesson();
