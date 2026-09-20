@@ -3,21 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SpeedType Trainer — type faster</title>
+  <title>SpeedType Trainer — type faster, race your friends</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
     <h1>SpeedType Trainer</h1>
-    <p class="tagline">Practice every day to type faster</p>
+    <p class="tagline">Practice every day — then race your friends online</p>
+    <button id="theme-btn" class="theme-btn" type="button">Theme: Dark</button>
   </header>
 
   <main>
     <section class="controls">
-      <div class="modes">
-        <button data-mode="words" class="mode-btn active">Words (30)</button>
-        <button data-mode="time" class="mode-btn">Time (60s)</button>
+      <div class="modes" id="mode-row">
+        <button data-mode="words" class="mode-btn active">Words</button>
+        <button data-mode="time" class="mode-btn">Time</button>
+        <button data-mode="lessons" class="mode-btn">Lessons</button>
+        <button data-mode="online" class="mode-btn">Online</button>
       </div>
+      <label class="difficulty">
+        Difficulty
+        <select id="difficulty">
+          <option value="easy">Easy</option>
+          <option value="medium" selected>Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+      </label>
       <div class="stats">
         <div class="stat">
           <span class="stat-value" id="wpm-live">0</span>
@@ -34,37 +45,78 @@
       </div>
     </section>
 
-    <section class="prompt-box" id="prompt-box" tabindex="0">
-      <p id="prompt" aria-label="type this text"></p>
-    </section>
+    <div id="game-area">
+      <section class="lesson-banner" id="lesson-panel" hidden>
+        <h2>Progressive lessons</h2>
+        <div id="lesson-list"></div>
+        <button id="next-lesson" class="small-btn" type="button">Replay / next round</button>
+      </section>
 
-    <section class="result" id="result" hidden>
-      <h2>Result</h2>
-      <div class="result-stats">
-        <div class="stat">
-          <span class="stat-value" id="result-wpm">0</span>
-          <span class="stat-label">WPM</span>
+      <section class="multi-panel" id="multi-panel" hidden>
+        <h2>Online race</h2>
+        <div id="host-box">
+          <button id="multi-create" class="accent-btn" type="button">Create room</button>
         </div>
-        <div class="stat">
-          <span class="stat-value" id="result-acc">0</span>
-          <span class="stat-label">Accuracy</span>
+        <div id="join-box">
+          <input id="join-code" maxlength="6" placeholder="friend's room code" autocomplete="off">
+          <button id="multi-join" class="accent-btn" type="button">Join room</button>
         </div>
-        <div class="stat">
-          <span class="stat-value" id="result-raw">0</span>
-          <span class="stat-label">Raw WPM</span>
+        <p class="multi-status" id="multi-status">Create a room and share the code, or join with a friend's code.</p>
+        <p class="multi-code">Room code: <strong id="multi-code"></strong></p>
+        <div class="players">
+          <div class="player">
+            <span class="player-name">You</span>
+            <div class="bar"><div class="bar-fill" id="my-bar"></div></div>
+          </div>
+          <div class="player">
+            <span class="player-name" id="opp-name">Opponent</span>
+            <span class="player-wpm" id="opp-wpm"></span>
+            <div class="bar"><div class="bar-fill opp" id="opp-bar"></div></div>
+          </div>
         </div>
-        <div class="stat">
-          <span class="stat-value" id="result-chars">0</span>
-          <span class="stat-label">Chars</span>
+        <p class="multi-outcome" id="multi-outcome"></p>
+        <button id="multi-leave" class="small-btn" type="button">Leave room</button>
+      </section>
+
+      <section class="prompt-box" id="prompt-box" tabindex="0">
+        <p id="prompt" aria-label="type this text"></p>
+      </section>
+
+      <div class="keyboard" id="keyboard" aria-hidden="true"></div>
+      <p class="finger-hint" id="finger-hint">Type to start</p>
+
+      <section class="result" id="result" hidden>
+        <h2>Result</h2>
+        <div class="result-stats">
+          <div class="stat">
+            <span class="stat-value" id="result-wpm">0</span>
+            <span class="stat-label">WPM</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value" id="result-acc">0</span>
+            <span class="stat-label">Accuracy</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value" id="result-raw">0</span>
+            <span class="stat-label">Raw WPM</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value" id="result-chars">0</span>
+            <span class="stat-label">Chars</span>
+          </div>
         </div>
-      </div>
-      <p class="motivation" id="motivation"></p>
-      <button id="restart" class="restart-btn">Try again</button>
-    </section>
+        <p class="motivation" id="motivation"></p>
+        <button id="restart" class="restart-btn" type="button">Try again</button>
+      </section>
+
+      <section class="scoreboard">
+        <h2>Top scores on this device</h2>
+        <div id="scoreboard"></div>
+      </section>
+    </div>
 
     <section class="progress">
       <h2>Your progress</h2>
-      <p class="progress-hint">Best scores from past tests (saved on this device)</p>
       <canvas id="chart" width="780" height="260"></canvas>
       <p class="best" id="best"></p>
     </section>
@@ -74,6 +126,10 @@
     <p>Tip: steady rhythm beats speed. Accuracy first, speed follows.</p>
   </footer>
 
+  <script src="https://unpkg.com/peerjs@1.5.5/dist/peerjs.min.js"></script>
+  <script src="data.js"></script>
+  <script src="engine.js"></script>
+  <script src="multiplayer.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
