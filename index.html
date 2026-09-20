@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpeedType Trainer — type faster</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>SpeedType Trainer</h1>
+    <p class="tagline">Practice every day to type faster</p>
+  </header>
+
+  <main>
+    <section class="controls">
+      <div class="modes">
+        <button data-mode="words" class="mode-btn active">Words (30)</button>
+        <button data-mode="time" class="mode-btn">Time (60s)</button>
+      </div>
+      <div class="stats">
+        <div class="stat">
+          <span class="stat-value" id="wpm-live">0</span>
+          <span class="stat-label">WPM</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="acc-live">100</span>
+          <span class="stat-label">Accuracy</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="timer-live">--</span>
+          <span class="stat-label">Time</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="prompt-box" id="prompt-box" tabindex="0">
+      <p id="prompt" aria-label="type this text"></p>
+    </section>
+
+    <section class="result" id="result" hidden>
+      <h2>Result</h2>
+      <div class="result-stats">
+        <div class="stat">
+          <span class="stat-value" id="result-wpm">0</span>
+          <span class="stat-label">WPM</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="result-acc">0</span>
+          <span class="stat-label">Accuracy</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="result-raw">0</span>
+          <span class="stat-label">Raw WPM</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="result-chars">0</span>
+          <span class="stat-label">Chars</span>
+        </div>
+      </div>
+      <p class="motivation" id="motivation"></p>
+      <button id="restart" class="restart-btn">Try again</button>
+    </section>
+
+    <section class="progress">
+      <h2>Your progress</h2>
+      <p class="progress-hint">Best scores from past tests (saved on this device)</p>
+      <canvas id="chart" width="780" height="260"></canvas>
+      <p class="best" id="best"></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Tip: steady rhythm beats speed. Accuracy first, speed follows.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
